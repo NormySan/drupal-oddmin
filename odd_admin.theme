@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Main theme file for the Odd Admin theme.
+ */
+
+require_once __DIR__ . '/includes/preprocess.inc';
+require_once __DIR__ . '/includes/suggestions.inc';
+
+/**
+ * Implements THEME_page_attachments_alter()
+ */
+function odd_admin_page_attachments_alter(&$page) {
+  // Get theme name
+  $theme_name = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Get breakpoints from the theme
+  $breakpointManager = \Drupal::service('breakpoint.manager');
+  $breakpoints = $breakpointManager->getBreakpointsByGroup($theme_name);
+
+  // Attach the breakpoints to drupalSettings
+  $media_queries = array();
+  foreach ($breakpoints as $id => $breakpoint) {
+    $key = explode('.', $id)[1];
+    $media_queries[$key] = $breakpoint->getMediaQuery();
+  }
+
+  $page['#attached']['drupalSettings'][$theme_name]['breakpoints'] = $media_queries;
+}
+
+/**
+ * Implements THEME_library_info_alter()
+ */
+function odd_admin_library_info_alter(&$libraries, $extension) {
+  if ($extension === 'odd_admin') {
+    // Get performance configs
+    $performance = \Drupal::config('system.performance');
+
+    // Our replacement paths
+    $replacements = [
+      'js' => ['dist/bundle.js' => []],
+      'css' => [
+        'theme' => [
+          'dist/main.css' => [],
+          'dist/print.css' => ['media' => 'print'],
+          'node_modules/semantic-ui-css/semantic.css' => [],
+        ],
+      ],
+    ];
+
+    // Replace minified files with normal when aggregation is false.
+    foreach ($replacements as $key => $replacement) {
+      if ($performance->get($key)['preprocess']) continue;
+      $libraries['global'][$key] = $replacement;
+    }
+  }
+}
+
+function odd_admin_element_info_alter(array &$types) {
+  var_dump($types);
+  die;
+}

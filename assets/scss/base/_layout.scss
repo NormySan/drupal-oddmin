@@ -1,0 +1,83 @@
+// Page container, wrapps everything.
+.page-container {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+// Sidebar.
+.sidebar-left {
+  background-color: #1b1c1d;
+  flex: 0 0 300px;
+
+  .ui.vertical.menu {
+    background: none;
+    border-radius: 0;
+  }
+
+  .ui.vertical.menu > .item {
+    &:first-child,
+    &:last-child {
+      border-radius: 0;
+    }
+  }
+}
+
+// Content area.
+.layout-container {
+  flex: 1;
+  overflow-y: scroll;
+  margin: 0;
+}
+
+// Generic section styling.
+.page-section {
+  margin: 20px;
+}
+
+.page-top-bar {
+  margin: 0;
+  padding: 0;
+}
+
+// Header region.
+.page-header {
+  background-color: #EEE;
+  border-bottom: 1px solid #d4d4d5;
+  padding: 20px 20px 0;
+  margin: 0 0 20px;
+
+  .page-title {
+    display: inline-block;
+    margin: 0 0 20px;
+  }
+
+  .ui.tabular.menu {
+    bottom: -1px;
+    position: relative;
+  }
+}
+
+// Content region.
+.page-content {}
+
+// Top bar menu.
+.ui.menu.top-bar {
+  border-radius: 0;
+  border-width: 0 0 1px;
+  box-shadow: none;
+}
+
+// Content section styling.
+.content-section {
+  margin: 20px 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

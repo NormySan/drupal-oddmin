@@ -1,0 +1,116 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a set of links.
+ *
+ * Available variables:
+ * - attributes: Attributes for the UL containing the list of links.
+ * - links: Links to be output.
+ *   Each link will have the following elements:
+ *   - title: The link text.
+ *   - href: The link URL. If omitted, the 'title' is shown as a plain text
+ *     item in the links list. If 'href' is supplied, the entire link is passed
+ *     to l() as its $options parameter.
+ *   - attributes: (optional) HTML attributes for the anchor, or for the <span>
+ *     tag if no 'href' is supplied.
+ *   - link_key: The link CSS class.
+ * - heading: (optional) A heading to precede the links.
+ *   - text: The heading text.
+ *   - level: The heading level (e.g. 'h2', 'h3').
+ *   - attributes: (optional) A keyed list of attributes for the heading.
+ *   If the heading is a string, it will be used as the text of the heading and
+ *   the level will default to 'h2'.
+ *
+ *   Headings should be used on navigation menus and any list of links that
+ *   consistently appears on multiple pages. To make the heading invisible use
+ *   the 'visually-hidden' CSS class. Do not use 'display:none', which
+ *   removes it from screen readers and assistive technology. Headings allow
+ *   screen reader and keyboard only users to navigate to or skip the links.
+ *   See http://juicystudio.com/article/screen-readers-display-none.php and
+ *   http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
+ *
+ * @see template_preprocess_links()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if links -%}
+
+  {% set firstlink = links|first %}
+
+  {%- if heading -%}
+    {%- if heading.level -%}
+      <{{ heading.level }}{{ heading.attributes }}>
+        {{ heading.text }}
+      </{{ heading.level }}>
+    {%- else -%}
+      <h2 {{ heading.attributes }}>
+        {{ heading.text }}
+      </h2>
+    {%- endif -%}
+  {%- endif -%}
+
+  <div {{ attributes.addClass(['ui', 'buttons']) }}>
+    {%- if firstlink.link -%}
+      <a class="ui button" href="{{ firstlink.link['#url'] }}">
+        {% if firstlink.icon %}
+          <i class="{{ firstlink.icon }} icon"></i>
+        {% endif %}
+
+        {{ firstlink.link['#title'] }}
+      </a>
+    {%- elseif firstlink.text_attributes -%}
+      <div {{ firstlink.text_attributes.addClass(['ui', 'button']) }}>
+        {% if item.icon %}
+          <i class="{{ item.icon }} icon"></i>
+        {% endif %}
+
+        {{ firstlink.text }}
+      </div>
+    {%- else -%}
+      <div class="ui button">
+        {% if item.icon %}
+          <i class="{{ item.icon }} icon"></i>
+        {% endif %}
+
+        {{ firstlink.text }}
+      </div>
+    {%- endif -%}
+
+    {% if links|length > 1 %}
+      <div class="ui floating dropdown icon button">
+        <i class="dropdown icon"></i>
+
+        <div class="menu">
+          {%- for key, item in links|slice(1) -%}
+              {%- if item.link -%}
+                <a class="item" href="{{ item.link['#url'] }}">
+                  {% if item.icon %}
+                    <i class="{{ item.icon }} icon"></i>
+                  {% endif %}
+
+                  {{ item.link['#title'] }}
+                </a>
+              {%- elseif item.text_attributes -%}
+                <div{{ item.text_attributes }}>
+                  {% if item.icon %}
+                    <i class="{{ item.icon }} icon"></i>
+                  {% endif %}
+
+                  {{ item.text }}
+                </div>
+              {%- else -%}
+                <div class="item">
+                  {% if item.icon %}
+                    <i class="{{ item.icon }} icon"></i>
+                  {% endif %}
+
+                  {{ item.text }}
+                </div>
+              {%- endif -%}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{%- endif %}

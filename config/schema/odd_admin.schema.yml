@@ -1,0 +1,5 @@
+# Schema for the configuration files of the Odd Admin theme.
+
+odd_admin.settings:
+  type: theme_settings
+  label: 'Odd admin settings'

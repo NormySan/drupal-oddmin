@@ -1,0 +1,14 @@
+global:
+  css:
+    theme:
+      dist/main.min.css: {}
+      dist/print.min.css: { media: print }
+      node_modules/semantic-ui-css/semantic.min.css: {}
+  js:
+    dist/bundle.min.js: { minified: true }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/normalize
+    - core/modernizr

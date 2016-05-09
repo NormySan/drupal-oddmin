@@ -1,0 +1,6 @@
+odd_admin.small:
+  label: breakpoint-small
+  mediaQuery: 'all and (max-width: 500px)'
+  weight: 0
+  multipliers:
+    - 1x
