@@ -39,7 +39,7 @@
     sticky ? 'sticky-enabled',
   ]
 %}
-<table{{ attributes.addClass(classes|merge(['ui', 'celled', 'padded', 'table'])) }}>
+<table{{ attributes.addClass(classes|merge(['ui', 'selectable', 'padded', 'table'])) }}>
   {% if caption_needed %}
     <caption>
       {% if caption %}

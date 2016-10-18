@@ -1,9 +1,9 @@
 global:
   css:
     theme:
+      node_modules/semantic-ui-css/semantic.min.css: {}
       dist/main.min.css: {}
       dist/print.min.css: { media: print }
-      node_modules/semantic-ui-css/semantic.min.css: {}
   js:
     dist/bundle.min.js: { minified: true }
   dependencies:

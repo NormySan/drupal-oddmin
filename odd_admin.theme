@@ -58,6 +58,6 @@ function odd_admin_library_info_alter(&$libraries, $extension) {
 }
 
 function odd_admin_element_info_alter(array &$types) {
-  var_dump($types);
-  die;
+  // var_dump($types);
+  // die;
 }

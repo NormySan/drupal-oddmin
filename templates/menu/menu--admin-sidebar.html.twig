@@ -33,17 +33,17 @@
 
   {% if items %}
     {% if menu_level == 0 %}
-      <div {{ attributes.addClass(['ui', 'fluid', 'vertical', 'menu']) }}>
-    {% else %}
-      <div class="menu">
+<div {{ attributes.addClass(['ui', 'fluid', 'inverted', 'vertical', 'menu']) }}>
+  {% else %}
+  <div class="menu">
     {% endif %}
 
     {% for item in items %}
       {%
-        set item_classes = [
-          item.below ? 'dropdown',
-          'item',
-        ]
+      set item_classes = [
+      item.below ? 'dropdown',
+      'item',
+      ]
       %}
 
       <a href="{{ item.url }}" {{ item.attributes.addClass(item_classes) }}>
@@ -56,6 +56,6 @@
       </a>
     {% endfor %}
 
-    </div>
+  </div>
   {% endif %}
-{% endmacro %}
+  {% endmacro %}

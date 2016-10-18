@@ -18,7 +18,7 @@
 #}
 <details {{ attributes.addClass(['ui', 'segment']) }}>
   {%- if title -%}
-    <summary {{ summary_attributes }}>{{ title }}</summary>
+    <summary {{ summary_attributes.addClass(['ui', 'header']) }}>{{ title }}</summary>
   {%- endif -%}
 
   {% if errors %}
